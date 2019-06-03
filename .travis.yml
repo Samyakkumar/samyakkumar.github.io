@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+- stable
+cache:
+  directories:
+  - client/node_modules
+  - server/node_modules
+script:
+- bash scripts/travis_test.sh
+- bash scripts/travis_build.sh
+true:
+  branch: master
+os:
+- osx
+deploy:
+  provider: heroku
+  api_key:
+    secure: pMjOpPa50Xc0HeTQeQCbEMe2HVXmRHpD8qubMfY/phJmL1i7w/pUmJA9em5kavuIVNpOGsXiAmoRaPUJszcwwkHLk3EkR4l3UMOxT6Aa4VSs6+EFHu9xO1t4TtbcKXv6MwKcdM6aCdbpEYyD1rEZIhpLG8A1LYZMq0PqOc/hmTd0vVjUp4VI4NJcuF5mJz8qxPEf63Ngv2rsnx+jahwO55miDwLFt7EAbx3um3sMn7wygkUUF5Pa9bzW5YCaiQIewohDuTvZw3ovbtU5W12PZQ1FsI7OYOKvt0huEnhpgb4BsLW1ISsdanqwfSeqRZBzMMTcWYb2j/zHquhdHBvsrrGwX9DYYFUui5WaQUpZop03RtDLEyf62eT/O/y3BmYx6ULKIaHgpCgbtgw0NhEO3Xwzugvv9P/kNefCPtKnma9AgcjBRYFuYJkg5IX4rKnutnz3sOfLwQ1AxX3tG3v2dA0VK4ZFwLtMOTFJFOtqRkD3yfdBsdBgMHTpSomyqFgTKf1rWSNgy16QA6bbq+e4P6eWTTpBIvRL/MSi89URymAlca7YKAtAb3nOQmcpjk3QLPEJB3iqNJ6DugyAY5LonqaV1N7BHkJZZ8SWrv+ZD/BCAS7k6OKIHGBxfhUULyQIqH2Y+VFlFcwMY6xIFuSD5Y+5fXC+xGsc7h+nLHAT6iQ=
+  app: samyakkumar
