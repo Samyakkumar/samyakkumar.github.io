@@ -9,10 +9,16 @@
     "react-scripts": "3.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "_comment": "We're force npm installing to fix an issue with fsevents, TODO: Fix this",
+    "start": "cd server/ && npm start",
+    "install-client": "npm install -f --prefix client",
+    "install-server": "npm install -f --prefix server",
+    "build-client": "cd client/ && npm build",
+    "postinstall": "npm run install-client -f && npm run install-server -f && npm run build-client -f",
+    "heroku-postbuild": "cd client && npm install --only=dev -f && npm install -f && rm -rf ~/node_modules/babel-jest ~/node_modules/jest && npm run build",
+    "server": "nodemon server/app.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "eslintConfig": {
     "extends": "react-app"
