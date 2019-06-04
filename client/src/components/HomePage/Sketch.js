@@ -12,17 +12,17 @@ function sketch(p) {
     p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
         //p.createCanvas(p.windowWidth, p.windowHeight);
         term = new Icon(props.img[0], "Terminal", p.windowWidth / 2 - 50, p.windowHeight / 2 + 50, p);
-        resume = new Icon(props.img[1], "Resume", p.windowWidth / 2 + 40, p.windowHeight / 2 + 50, p);
+        resume = new Icon(props.img[1], "Resume", p.windowWidth / 2 + 50, p.windowHeight / 2 + 50, p);
+        icons = [term, resume];
         
     }
     p.mousePressed = () => {
         console.log("press")
-        if (term.mouseIn(p.mouseX, p.mouseY)) {
-            console.log("term")
-        }
+        for (let i = 0; i < icons.length; i++) {
+            if (icons[i].mouseIn(p.mouseX, p.mouseY)) {
+                console.log(icons[i].label);
+            }
 
-        if (resume.mouseIn(p.mouseX, p.mouseY)) {
-            console.log("resu")
         }
     }
 
@@ -36,8 +36,9 @@ function sketch(p) {
         p.text("Hello World", textLoc[0], textLoc[1]);
 
         try {
-            term.show();
-            resume.show();
+            for (let i = 0; i < icons.length; i++) {
+                icons[i].show();
+            }
         } catch {
             console.log("image still loading")
         } finally {
@@ -63,11 +64,10 @@ class Icon {
         .strokeWeight(0)
         .textSize(15);
         this.p.textStyle(this.p.ITALIC);
-        this.p.text(this.label, this.x - 8, this.y + 60);
+        this.p.text(this.label, this.x - 8, this.y + 64);
     }
 
     mouseIn( x,  y) {
-
         return (x >= this.x - 50 && x <= this.x + 50 && y <= this.y + 50 && y >= this.y - 50);
     }
     
