@@ -11,10 +11,24 @@ class HomePage extends Component {
         super(props)
     } 
 
+    /**
+   * Calculate & Update state of new dimensions
+   */
+  updateDimensions() {
+    
+  }
+
+  /**
+   * Add event listener
+   */
+  componentDidMount() {
+    this.updateDimensions();
+    window.addEventListener("resize", this.updateDimensions.bind(this));
+  }
     render() {
         return (
             <>
-            <Particle />
+            {/* <Particle /> */}
             <P5Wrapper sketch={sketch} img={[terminal, note]}/>
             </>
         )
