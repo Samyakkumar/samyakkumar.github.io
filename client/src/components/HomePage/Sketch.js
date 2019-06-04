@@ -15,6 +15,16 @@ function sketch(p) {
         resume = new Icon(props.img[1], "Resume", p.windowWidth / 2 + 40, p.windowHeight / 2 + 50, p);
         
     }
+    p.mousePressed = () => {
+        console.log("press")
+        if (term.mouseIn(p.mouseX, p.mouseY)) {
+            console.log("term")
+        }
+
+        if (resume.mouseIn(p.mouseX, p.mouseY)) {
+            console.log("resu")
+        }
+    }
 
     p.draw = function () {
         //p.background(100, 0, 0, 0);
@@ -54,6 +64,11 @@ class Icon {
         .textSize(15);
         this.p.textStyle(this.p.ITALIC);
         this.p.text(this.label, this.x - 8, this.y + 60);
+    }
+
+    mouseIn( x,  y) {
+
+        return (x >= this.x - 50 && x <= this.x + 50 && y <= this.y + 50 && y >= this.y - 50);
     }
     
 }
