@@ -8,7 +8,8 @@ import './style.css'
 
 class HomePage extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.updateDimensions = this.updateDimensions.bind(this);
     } 
 
     /**
@@ -23,7 +24,14 @@ class HomePage extends Component {
    */
   componentDidMount() {
     this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions.bind(this));
+    window.addEventListener("resize", this.updateDimensions);
+  }
+
+  /**
+   * Remove event listener
+   */
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
   }
     render() {
         return (
