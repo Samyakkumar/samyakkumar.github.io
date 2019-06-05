@@ -6,7 +6,7 @@ function sketch(p) {
     p.setup = function () {
         p.createCanvas(p.windowWidth, p.windowHeight);
         // term = terminal;
-        particles = new Particles(450, p.color(255, 255, 255, 80), p);
+        particles = new Particles(400, p.color(255, 255, 255, 80), p);
         console.log(p)
     }
 
@@ -112,39 +112,6 @@ class Particles {
             this.particles[i].cohesion(this.particles);
         }
     }
-    //flock
-    // flock() {
-    //     var nextClosest;
-    //     for (let i = 0; i < this.particles.length; i++) {
-    //         var minDist = Infinity;
-    //         var curr = this.particles[i];
-    //         var closestYet = null;
-    //         for (let j = 0; j < this.particles.length; j++) {
-    //             if (i != j) {
-    //                 var other = this.particles[j];
-    //                 var dist = Math.sqrt((other.x - curr.x)**2 + (other.y - curr.y)**2)
-    //                 if (dist < minDist) {
-    //                     closestYet = other;
-    //                     minDist = dist;
-    //                 }
-    //                 if (dist <= 30) {
-    //                     if (other) {
-    //                         this.p.line(curr.x, curr.y, other.x, other.y)
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //         //steering force
-    //         var steer = (this.p.createVector(closestYet.x - curr.x, closestYet.y - curr.y).sub(curr.vec));
-    //         steer.limit(0.1)
-    //         // console.log('here')
-    //         curr.seperate(this.particles);
-    //         curr.applyForce(steer)
-    //         curr.cohesion(this.particles);
-    //         this.p.strokeWeight(1);
-            
-    //     }
-    // }
 }
 
 class Particle {
@@ -154,9 +121,9 @@ class Particle {
         this.p = p;
         this.col = color;
         this.vec = p.createVector(p.random(-1,1), p.random(-1, 1));
-        this.desiredSeperation = 23;
+        this.desiredSeperation = 10;
         this.location = this.p.createVector(this.x, this.y)
-
+        this.maxVec = 5;
 
     }
 
@@ -167,7 +134,7 @@ class Particle {
         if (this.offScreen()) {
             this.x = this.p.random(0, this.p.windowWidth);
         this.y = this.p.random(0, this.p.windowHeight);
-        this.vec = this.p.createVector(this.p.random(-2,2), this.p.random(-2, 2));
+        this.vec = this.p.createVector(this.p.random(-this.maxVec,this.maxVec), this.p.random(-this.maxVec, this.maxVec));
         this.location = this.p.createVector(this.x, this.y)
         }
     }
@@ -182,7 +149,7 @@ class Particle {
         for (let i = 0; i < particles.length; i++) {
             var currParticle = particles[i];
             var d = Math.sqrt((currParticle.x - this.x)**2 + (currParticle.y - this.y)**2);
-            if (d > 0 && d <= this.desiredSeperation + 5) {
+            if (d > 0 && d <= this.desiredSeperation*5) {
                 this.p.strokeWeight(0.5);
 
                 this.p.line(this.x, this.y, currParticle.x, currParticle.y);
@@ -213,7 +180,7 @@ class Particle {
             sum.normalize();
             sum.mult(1);
             var steer = sum.copy().sub(this.vec);
-            steer.limit(0.6)
+            steer.limit(0.3)
             this.applyForce(steer);
         }
     }
@@ -239,7 +206,7 @@ class Particle {
             sum.normalize();
             sum.mult(0.1);
             var steer = sum.copy().sub(this.vec);
-            steer.limit(0.6)
+            steer.limit(0.01)
 
             steer.mult(-1);
             this.applyForce(steer);
@@ -267,7 +234,7 @@ class Particle {
             sum.normalize();
             sum.mult(1);
             var steer = sum.copy().sub(this.vec);
-            steer.limit(0.5)
+            steer.limit(0.4)
             this.applyForce(steer);
         } else {
             return new this.p.createVector(0, 0);
@@ -278,7 +245,7 @@ class Particle {
         // console.log("force")
         this.vec.add(force);
         var limit = this.p.map(this.p.windowWidth, 0, 1280, 8, 25);
-        this.vec.limit(limit)
+        this.vec.limit(3)
         this.location = this.p.createVector(this.x, this.y)
     }
 
