@@ -11,6 +11,7 @@ function initializeReactGA() {
 }
 
 function App() {
+  initializeReactGA();
   return (
     <Router>
       <Switch>
