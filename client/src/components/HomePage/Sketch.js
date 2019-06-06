@@ -142,7 +142,7 @@ class Particle {
     show(particles) {
         this.p.fill(this.col);
         // this.p.noStroke();
-        this.p.ellipse(this.x, this.y, 4, 4);
+        this.p.ellipse(this.x, this.y, 10, 10);
         // this.p.strokeWeight(1)
         // var heading = this.vec.copy().setMag(1).heading();
         // this.p.line(this.x, this.y, this.x + 15 * Math.cos(heading), this.y + (15) * Math.sin(heading))
