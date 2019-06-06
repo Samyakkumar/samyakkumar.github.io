@@ -61,9 +61,9 @@ function sketch(p) {
         .textSize(18);
         p.text(getCurrDay() + "  " + p.hour()+ " : " + p.minute() + " : " + p.second(), p.windowWidth / 2 - 70, 50);
         if (p.hour() >= 12) {
-            p.text("PM", p.windowWidth / 2 + 110, 50);
+            p.text("PM", p.windowWidth / 2 + 130, 50);
         } else {
-            p.text("AM", p.windowWidth / 2 + 110, 50);
+            p.text("AM", p.windowWidth / 2 + 130, 50);
         }
         
         p.fill(255)
