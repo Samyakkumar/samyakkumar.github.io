@@ -1,82 +1,29 @@
-import React, {Component} from 'react';
-import Particles from 'react-particles-js';
+import Particle from "./Particle";
 
-const particlesOptions = {
-        "particles": {
-            "number": {
-                "value": 80,
-                "density": {
-                    "enable": true,
-                    "density_auto": true,
-                    "value_area": 800
-                }
-            },
-            "color": {
-                "value": "#ffffff"
-            },
-            "shape": {
-                "type": "circle",
-                "stroke": {
-                    "width": 0,
-                    "color": "#000000"
-                },
-                "polygon": {
-                    "nb_sides": 5
-                },
-                "image": {
-                    "src": "img/github.svg",
-                    "width": 100,
-                    "height": 100
-                }
-            },
-            "opacity": {
-                "value": 0.5,
-                "random": false,
-                "anim": {
-                    "enable": false,
-                    "speed": 1,
-                    "opacity_min": 0.1,
-                    "sync": false
-                }
-            },
-            "size": {
-                "value": 3,
-                "random": true,
-                "anim": {
-                    "enable": false,
-                    "speed": 40,
-                    "size_min": 0.1,
-                    "sync": false
-                }
-            },
-            "line_linked": {
-                "enable": true,
-                "distance": 150,
-                "color": "#ffffff",
-                "opacity": 0.4,
-                "width": 1
-            },
-            "move": {
-                "enable": true,
-                "speed": 6,
-                "direction": "none",
-                "random": false,
-                "straight": false,
-                "out_mode": "out",
-                "bounce": false,
-                "attract": {
-                    "enable": false,
-                    "rotateX": 600,
-                    "rotateY": 1200
-                }
-            }
-        },
-        "retina_detect": true
-    }
-  class Particle extends Component {
-    render() {
-      return <Particles className='particles' params={particlesOptions} />
-    }
-  }
+class Particles {
+    constructor(numParticles, col, p) {
+        this.numberOfParticles = numParticles;
+        this.color = col;
+        this.p = p;
+        this.particles = []
 
-  export default Particle;
+        for (let i = 0; i < numParticles; i++) {
+            this.particles.push(new Particle(p, this.color));
+        }
+    }
+    show() {
+        for (let i = 0; i < this.particles.length; i++) {
+            this.particles[i].show(this.particles);
+        }
+    }
+
+    move() {
+        for (let i = 0; i < this.particles.length; i++) {
+            this.particles[i].move();
+            this.particles[i].seperate(this.particles);
+            this.particles[i].flock(this.particles);
+            this.particles[i].cohesion(this.particles);
+        }
+    }
+}
+export default Particles;
