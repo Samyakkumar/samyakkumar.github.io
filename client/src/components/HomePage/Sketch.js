@@ -26,6 +26,8 @@ function sketch(p) {
     }
     p.windowResized = () => {
         p.resizeCanvas(p.windowWidth, p.windowHeight);
+        var numParts = p.map(p.windowWidth, 0, 1280, 100, 300);
+        particles = new Particles(numParts, p.color(100, 100, 100, 20), p);
         updateVars();
       }
     
