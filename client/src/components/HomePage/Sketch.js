@@ -10,7 +10,8 @@ function sketch(p) {
     p.setup = function () {
         p.createCanvas(p.windowWidth, p.windowHeight);
         // term = terminal;
-        particles = new Particles(100, p.color(100, 100, 100, 20), p);
+        var numParts = p.map(p.windowWidth,300 , 1280, 10, 300);
+        particles = new Particles(numParts, p.color(100, 100, 100, 20), p);
         console.log(p)
     }
 
@@ -26,7 +27,7 @@ function sketch(p) {
     }
     p.windowResized = () => {
         p.resizeCanvas(p.windowWidth, p.windowHeight);
-        var numParts = p.map(p.windowWidth, 0, 1280, 100, 300);
+        var numParts = p.map(p.windowWidth, 300, 1280, 10, 300);
         particles = new Particles(numParts, p.color(100, 100, 100, 20), p);
         updateVars();
       }
