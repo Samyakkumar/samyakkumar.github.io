@@ -37,11 +37,9 @@ function sketch(p) {
             if (icons[i].mouseIn(p.mouseX, p.mouseY)) { 
                 p.clear();
                 p.background(182,25,36);           
-                icons[i].showWindow();
-                windowShowing = true;
+                icons[i].isShowWindow = true;
             }
         }
-        p.redraw();
 
     }
 

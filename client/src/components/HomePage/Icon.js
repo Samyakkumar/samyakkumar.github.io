@@ -8,6 +8,7 @@ class Icon {
         this.y = y;
         this.p = p;
         this.foundImg = p.loadImage(this.img)
+        this.isShowWindow = false;
     }
 
     show() {
@@ -18,6 +19,9 @@ class Icon {
         .textSize(15);
         this.p.textStyle(this.p.ITALIC);
         this.p.text(this.label, this.x - 8, this.y + 64);
+        if (this.isShowWindow) {
+            this.showWindow();
+        }
     }
 
     mouseIn( x,  y) {
