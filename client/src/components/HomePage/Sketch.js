@@ -7,6 +7,7 @@ function sketch(p) {
     let icons;
     let particles;
     let windowShowing = false;
+    let showIcons = [true, true, true, true, true, true]
     p.setup = function () {
         p.createCanvas(p.windowWidth, p.windowHeight);
         // term = terminal;
@@ -38,6 +39,11 @@ function sketch(p) {
                 p.clear();
                 p.background(182,25,36);           
                 icons[i].isShowWindow = true;
+                for (let j = 0; j < icons.length; j++) {
+                    if (i != j) {
+                        showIcons[j] = false;
+                    }
+                }
             }
         }
 
@@ -98,7 +104,9 @@ function sketch(p) {
         try {
             if (!windowShowing) {
             for (let i = 0; i < icons.length; i++) {
-                icons[i].show();
+                if (showIcons[i]) {
+                    icons[i].show();
+                }
             }
             }
         } catch {
