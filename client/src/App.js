@@ -1,23 +1,25 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
 import logo from './logo.svg';
-import Home from './pages/Home'
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Home from "./components/Home/Home";
 import './App.css';
 
-import ReactGA from 'react-ga';
-
-function initializeReactGA() {
-  ReactGA.initialize('UA-141601792-1');
-  ReactGA.pageview(window.location.pathname + window.location.search);
-}
-
 function App() {
-  initializeReactGA();
   return (
     <Router>
-      <Switch>
-        <Route exact path="/home" component={Home} />
-      </Switch>
+    <div className="App">
+    <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/home">
+        <Home />
+      </Route>
+    </div>
     </Router>
   );
 }
