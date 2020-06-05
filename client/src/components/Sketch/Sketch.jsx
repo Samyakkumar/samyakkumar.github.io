@@ -155,6 +155,15 @@ const RainSketch = (p) =>  {
 export default function Sketch() {
     const [myRef, setMyRef] = useState(React.createRef())
     const [isRain, setIsRain] = useState(true)
+    const [lat, setLat] = useState(33.753746)
+    const [long, setLong] = useState(-84.386330)
+    const [weather, setWeather] = useState(null)
+    const [hasWeather, setHasWeather] = useState(false)
+    const [cityName, setCityName] = useState("Atlanta")
+    const [hasCity, setHasCity] = useState(false)
+    
+
+    
     // setmyP5(new p5(sketch, myRef.current))
     useEffect(()=>{
         if (isRain) {
@@ -163,6 +172,38 @@ export default function Sketch() {
                 canvas.remove()
             }
         }
+
+        navigator.geolocation.getCurrentPosition((pos) => {
+            if (pos && !hasWeather) {
+                console.log("Latitude " + pos.coords.latitude);
+                setLat(pos.coords.latitude);
+                console.log("longitude " + pos.coords.longitude);
+                setLong(pos.coords.longitude);
+                if (!hasCity) {
+                    fetch("https://api.mapbox.com/geocoding/v5/mapbox.places/" + long + "," + lat + ".json?limit=1&access_token=pk.eyJ1Ijoic2FteWFra3VtYXIiLCJhIjoiY2p4a2RsMXQyMDNxaTNybHFjZnRkcXp6eSJ9.vj-Bgp0H-1_OGC6ODQSvCg")
+                    .then((res) => res.json().then(dat => {
+                    var context = dat["features"];
+                    console.log(context.length)
+                    if (context.length > 0) {
+                        context = dat["features"][0]["context"];
+                        for (var i = 0; i < context.length; i++) {
+                            if ("place" == context[i]["id"].split('.')) {
+                                setCityName(context[i]["text"])
+                                console.log(context[i]["text"])
+                                setHasCity(true);
+                                break;
+                            }
+                        }
+                    }
+                }))
+                }
+                fetch("http://api.openweathermap.org/data/2.5/weather?q=Atlanta" + "&appid=8bec09210e082b231bce64431923b596")
+                .then((res) => res.json().then(dat => {
+                    setWeather(dat["weather"][0]["description"])
+                    setHasWeather(true)
+                }))
+            }
+        })
     })
     return (
         <div>
@@ -170,6 +211,7 @@ export default function Sketch() {
 
             </div>
             <button onClick={() => {setIsRain(!isRain)}}>Toggle Rain</button>
+    {hasCity && <h1>{cityName}</h1>}
 
         </div>
     )
