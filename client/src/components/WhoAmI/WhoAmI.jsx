@@ -58,7 +58,7 @@ export default function WhoAmI() {
       });
 
     var rainGeo = new THREE.Geometry();
-    var rainCount = 800;
+    var rainCount = 1500;
     for(let i=0;i<rainCount;i++) {
     var rainDrop = new THREE.Vector3(
         Math.random() * 400 -200,
@@ -72,8 +72,9 @@ export default function WhoAmI() {
 
     var rainMaterial = new THREE.PointsMaterial({
         color: 0xaaaaaa,
-        size: 0.1,
-        transparent: true
+        size: 0.4,
+        transparent: true,
+        opacity:0.8
       });
       var rain = new THREE.Points(rainGeo,rainMaterial);
       scene.add(rain);
@@ -120,7 +121,7 @@ export default function WhoAmI() {
             300 + Math.random() *200,
             100
           );
-        flash.power = 50 + Math.random() * 200;
+        flash.power = 50 + Math.random() * 250;
       }
 
       rainGeo.vertices.forEach(p => {
@@ -132,7 +133,7 @@ export default function WhoAmI() {
         }
       });
       rainGeo.verticesNeedUpdate = true;
-      rain.rotation.y +=0.002;
+      rain.rotation.y +=0.004;
     
     cloudParticles.forEach(p => {
         p.rotation.z -=0.002;
