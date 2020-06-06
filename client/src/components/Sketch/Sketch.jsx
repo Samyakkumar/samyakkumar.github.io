@@ -166,14 +166,16 @@ export default function Sketch() {
     
     // setmyP5(new p5(sketch, myRef.current))
     useEffect(()=>{
-        if (isRain) {
-            let canvas = new p5(RainSketch, myRef.current)
+      let canvas = new p5(RainSketch, myRef.current)
             return () => {
                 canvas.remove()
             }
+        if (isRain) {
+            
         }
 
         navigator.geolocation.getCurrentPosition((pos) => {
+          console.log(pos)
             if (pos && !hasWeather) {
                 console.log("Latitude " + pos.coords.latitude);
                 setLat(pos.coords.latitude);
@@ -206,12 +208,7 @@ export default function Sketch() {
         })
     })
     return (
-        <div>
-            <div ref={myRef}>
-
-            </div>
-            <button onClick={() => {setIsRain(!isRain)}}>Toggle Rain</button>
-    {hasCity && <h1>{cityName}</h1>}
+        <div ref={myRef}>
 
         </div>
     )
