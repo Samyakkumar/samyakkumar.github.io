@@ -28,7 +28,8 @@ export default function WhoAmI() {
     scene.add(flash);
 
     var renderer = new THREE.WebGLRenderer();
-    scene.fog = new THREE.FogExp2(0x11111f, 0.002);
+    // 0x11111f
+    scene.fog = new THREE.FogExp2(0x99ccff, 0.002);
     renderer.setClearColor(scene.fog.color);
     renderer.setSize( window.innerWidth, window.innerHeight );
     ref.current.appendChild( renderer.domElement );
@@ -36,7 +37,7 @@ export default function WhoAmI() {
 
     let loader = new THREE.TextureLoader();
     loader.load("./images/smoke-1.png", function(texture){
-        var cloudGeo = new THREE.PlaneBufferGeometry(500,500);
+        var cloudGeo = new THREE.PlaneBufferGeometry(800,800);
         var cloudMaterial = new THREE.MeshLambertMaterial({
           map: texture,
           transparent: true
@@ -69,9 +70,9 @@ export default function WhoAmI() {
     rainDrop.velocity = 0;
     rainGeo.vertices.push(rainDrop);
     }
-
+    //aaaaaa
     var rainMaterial = new THREE.PointsMaterial({
-        color: 0xaaaaaa,
+        color: 0xa1c6cc,
         size: 0.4,
         transparent: true,
         opacity:0.8
