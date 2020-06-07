@@ -28,8 +28,8 @@ export default function WhoAmI() {
     scene.add(flash);
 
     var renderer = new THREE.WebGLRenderer();
-    // 0x11111f
-    scene.fog = new THREE.FogExp2(0x99ccff, 0.002);
+    // 0x99ccff
+    scene.fog = new THREE.FogExp2(0x11111f, 0.002);
     renderer.setClearColor(scene.fog.color);
     renderer.setSize( window.innerWidth, window.innerHeight );
     ref.current.appendChild( renderer.domElement );
